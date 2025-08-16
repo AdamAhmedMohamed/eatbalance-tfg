@@ -1,0 +1,133 @@
+
+
+.resumen {
+    font-family: 'GothamRounded';
+    padding: 2rem;
+    background-image: url(/eatbalance/fondo.jpg);
+    background-attachment: fixed;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin distorsión */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: 300%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+    color: #ebc870;
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: 150%;
+    line-height: 1.2;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.introduction-section,
+.modules-section,
+.instructor-section,
+.details-section,
+.contact-section {
+    margin-bottom: 2.5rem;
+}
+
+h2 {
+    color: #007acc;
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 1.2rem;
+}
+
+.slide-in-zoom {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-in-zoom.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.sky-blue-button {
+    background-color: #16223f;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.sky-blue-button:hover {
+    background-color: #008ecc;
+}
+
+.courses-section {
+    margin-bottom: 2.5rem;
+}
+
+.courses-section h2 {
+    color: #007acc;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.courses-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.courses-section li {
+    margin-bottom: 2rem;
+    background: #5d95ca85;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.courses-section li strong {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.courses-section li p {
+    margin: 0.5rem 0 1rem;
+    color: #555;
+}
+
+
+.courses-section li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+.courses-section li:focus-within {
+    outline: 2px solid #007acc;
+    outline-offset: 4px;
+}
+

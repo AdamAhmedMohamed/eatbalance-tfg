@@ -1,0 +1,16 @@
+# === FRONTEND ===
+eatbalance-frontend2/node_modules/
+eatbalance-frontend2/dist/
+eatbalance-frontend2/.env
+
+# === BACKEND (Python/FastAPI) ===
+eatbalance-backend/.venv/
+eatbalance-backend/venv/
+eatbalance-backend/__pycache__/
+eatbalance-backend/*.pyc
+eatbalance-backend/.env
+
+# === Global OS / IDE ===
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,24 @@
+/* src/styles/reset.css */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+/* Quita los márgenes laterales creados por both-edges */
+html { scrollbar-gutter: stable; }  /* o elimina esta línea si no lo necesitas */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#root, .App { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }

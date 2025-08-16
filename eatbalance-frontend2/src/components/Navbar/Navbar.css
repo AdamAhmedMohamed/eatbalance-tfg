@@ -1,0 +1,351 @@
+/* Navbar principal */
+.navbar {
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #16223f 0, black 100%);
+  color: white;
+  padding: 2px 15px;
+  border-radius: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  background-size: 100% 100%; /* Ensure the gradient spans the full height */
+  margin-bottom: 0 !important;
+  font-family: 'VarelaRound';
+}
+
+main, section, .contenido-principal, .after-navbar {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ajustar margen superior del primer título si es necesario */
+h1 {
+  margin-top: 1.5rem !important;
+}
+
+/* Ajustes específicos para Consultoría y Formación Empresas */
+.consultoria,
+.formacion-empresas {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.consultoria h1,
+.formacion-empresas h1 {
+  margin-top: 1.5rem !important;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.navbar-logo {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.1);
+}
+
+.navbar-logo img {
+  width: auto;
+  height: 75px; /* Tamaño equivalente al hover (ajusta si quieres) */
+  max-width: none;
+  transform: scale(1.5); /* Tamaño permanente igual al hover */
+  transition: none;
+  margin-top: -10px; /* Corrige el centrado vertical */
+  margin-bottom: -10px;
+}
+
+
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger-menu {
+  display: none;
+}
+
+.navbar-links li {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #5d95ca;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-links a:hover::after,
+.navbar-links .active::after {
+  width: 100%;
+  background-color: #5d95ca;
+}
+
+/* Enlace activo en menú normal */
+.navbar-links:not(.responsive-menu) .active {
+  font-weight: bold;
+}
+
+/* Enlace activo en menú lateral */
+.navbar-links.responsive-menu .active {
+  color: white !important;
+  font-weight: bold;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-top: -2.8px;
+  font-family: 'VarelaRound';
+}
+
+.dropdown-btn .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.dropdown.open .arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-btn::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #5d95ca;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #000;
+  margin: 0;
+}
+
+.dropdown-btn:hover::after {
+  width: 100%;
+}
+
+/* Restore general dropdown styles for horizontal screens */
+.dropdown-menu {
+  position: absolute;
+  background: linear-gradient(180deg, #002685 0, #000 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  left: 0;
+  text-align: center;
+  max-width: 300px;
+  margin-left: 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dropdown-menu a {
+  color: white;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--black-color-lighten);
+}
+
+/* Add animation for dropdown menu */
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to dropdown menu when open */
+.dropdown.open .dropdown-menu {
+  animation: dropdownOpen 0.3s ease forwards;
+}
+
+@media (max-width: 1200px) {
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+    font-size: 30px;
+    color: lightgray;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 250px;
+    background: linear-gradient(to bottom, #16223f 0, black 100%); /* Match regular navbar colors */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .navbar-links.responsive {
+    left: 0;
+  }
+
+  .navbar-logo {
+    display: none;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  .navbar {
+    width: 100%;
+    border-radius: 0;
+    top: 0;
+    position: fixed;
+    padding: 0.75rem 3.2rem;
+  }
+
+  /* Narrow viewport-specific dropdown styles */
+  .dropdown-menu {
+    position: relative;
+    background: #16223f;
+    box-shadow: none;
+    left: 0;
+    text-align: left;
+    max-width: 100%;
+    margin-left: 0;
+    padding-left: 10px; /* Add padding for better alignment */
+  }
+
+  .dropdown-menu a {
+    color: white;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: transparent;
+  }
+
+  .navbar-links .active {
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  body {
+    padding-top: 80px;
+  }
+
+  .navbar-links.responsive-menu a {
+    color: white !important;
+  }
+
+  .navbar-links.responsive-menu .active {
+    color: white !important;
+    font-weight: bold;
+  }
+
+  .navbar-links.responsive-menu .dropdown-btn {
+    color: white !important;
+  }
+}
+
+/* Ensure proper alignment of navbar links */
+.navbar-links {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: inline-block;
+  line-height: 1.5; /* Adjust line height for proper vertical alignment */
+  vertical-align: middle; /* Ensure vertical alignment */
+}

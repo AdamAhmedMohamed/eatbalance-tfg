@@ -1,0 +1,314 @@
+/* --- HERO más limpio --- */
+.hero-section {
+  position: relative;
+  min-height: 44vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+
+
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(6px) brightness(0.45);
+  transform: scale(1.06);
+}
+
+.hero-title {
+  position: relative;
+  letter-spacing: 1px;
+  font-size: clamp(28px, 4.4vw, 52px);
+  margin: 0.4rem 0;
+  color: #f8e08e;
+  text-shadow: 0 2px 16px rgba(0,0,0,.6);
+}
+
+.hero-subtitle {
+  position: relative;
+  color: #d8d8d8;
+  font-size: clamp(14px, 2.2vw, 20px);
+  margin: 0;
+}
+
+/* --- GRID principal --- */
+/* Centrar tarjetas cuando hay una sola */
+.search-grid {
+  display: flex;
+  justify-content: center;  /* centra horizontal */
+  align-items: flex-start;  /* puedes poner center si quieres en vertical */
+  flex-wrap: wrap;          /* por si añades más en responsive */
+  gap: 22px;
+  padding: 24px 16px 48px;
+}
+
+
+@media (min-width: 980px) {
+  .search-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- Tarjetas --- */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.25);
+}
+
+.card-title {
+  margin: 4px 0 6px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.card-subtitle {
+  margin: 0 0 14px;
+  color: #c8d1e1;
+  font-size: 14px;
+}
+
+/* --- Inputs y botones --- */
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  padding: 0 14px;
+  outline: none;
+}
+.input::placeholder { color: #b8c2d6; }
+
+.btn {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: none;
+  background: #376dfb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .06s ease, filter .2s ease;
+}
+.btn:disabled { filter: grayscale(.6); cursor: default; }
+.btn:hover:not(:disabled) { transform: translateY(-1px); }
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.25);
+}
+
+/* --- Lista resultados OFF --- */
+.lista { margin-top: 12px; display: grid; gap: 10px; }
+.list-item {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #e9eefb;
+  cursor: pointer;
+}
+.list-item.disabled { opacity: .55; cursor: not-allowed; }
+.list-item:hover:not(.disabled) { background: rgba(255,255,255,0.09); }
+
+.list-item-main { display: flex; align-items: center; gap: 10px; }
+.badge {
+  display: inline-grid; place-items: center;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: #2a4dd6; color: white; font-weight: 700;
+}
+.name { font-size: 15px; }
+.thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 10px; }
+
+/* --- Detalle producto --- */
+.detalle-head { display: flex; justify-content: space-between; gap: 12px; }
+.detalle-title { margin: 0; color: #fff; }
+.detalle-sub { margin: 2px 0 8px; color: #c8d1e1; font-size: 13px; }
+.foto { max-width: 120px; border-radius: 12px; }
+
+.kpi-grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+.kpi {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #e9eefb;
+}
+.kpi span { display: block; font-size: 12px; color: #b9c5db; }
+.kpi b { font-size: 16px; }
+
+/* --- Tarjeta USDA --- */
+.usda-card { margin-top: 12px; }
+.usda-title { margin: 0 0 6px; color: #fff; }
+
+/* --- Varias --- */
+.footer-actions { display: flex; gap: 8px; margin-top: 12px; }
+.error { color: #ffb3b3; margin-top: 8px; }
+.center { text-align: center; }
+
+/* Estilo tipo "asistente nutricional" para las tarjetas */
+.card {
+  background: #f7f8fa; /* fondo claro */
+  color: #1a1a1a; /* texto oscuro */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+}
+
+/* Títulos */
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Subtítulos */
+.card-subtitle {
+  color: #444;
+  font-size: 14px;
+}
+
+/* Inputs en fondo claro */
+.input {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.input::placeholder {
+  color: #888;
+}
+
+/* Botón estilo azul brillante */
+.btn {
+  background: #2d89ef;
+  color: white;
+  border: none;
+}
+.btn:hover:not(:disabled) {
+  background: #256fbe;
+}
+
+/* KPIs con fondo más claro */
+.kpi {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #222;
+}
+.kpi span {
+  color: #666;
+}
+.kpi b {
+  color: #000;
+}
+
+/* === Forzar texto oscuro en lista de resultados (OFF) === */
+.lista .list-item {
+  background: #ffffff;                 /* tarjeta blanca */
+  border: 1px solid #e5e7eb;
+  color: #222;                         /* color por defecto del item */
+}
+.lista .list-item:hover { background: #f3f4f6; }
+
+.lista .list-item .name {
+  color: #1f2937 !important;          /* gris oscuro */
+  font-weight: 500;
+}
+.lista .list-item.disabled {           /* solo deshabilitados con opacidad */
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Números/“badge” se mantienen como están */
+.badge { color: #fff; }
+
+/* === USDA: título y etiquetas con contraste === */
+.usda-title {
+  color: #111827 !important;           /* casi negro */
+  font-weight: 600;
+  font-style: normal;                   /* quitar cursiva si la hubiera */
+}
+
+/* Tarjetas de KPIs (labels y valores) en oscuro */
+.kpi {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+.kpi span { color: #4b5563 !important; /* etiqueta “Proteínas (100 g)” */ }
+.kpi b   { color: #111827 !important; }
+
+/* === Inputs y botón en claro por coherencia === */
+.input {
+  background: #fff;
+  color: #111827;
+  border: 1px solid #cfd4dc;
+}
+.input::placeholder { color: #6b7280; }
+.btn { background: #2d89ef; }
+.btn:hover:not(:disabled) { background: #256fbe; }
+
+/* === Detalle producto (OFF) – forzar modo claro con contraste === */
+.detalle { /* por si tienes un wrapper con inline style */
+  background: #f7f8fa !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* Título y subtítulo */
+.detalle-title {
+  color: #111827 !important;   /* casi negro */
+  font-weight: 700;
+  font-style: normal !important;
+}
+.detalle-sub {
+  color: #4b5563 !important;   /* gris medio */
+  font-style: normal !important;
+}
+
+/* KPIs del detalle (por 100 g) */
+.detalle .kpi {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #1f2937 !important;
+}
+.detalle .kpi span {
+  color: #6b7280 !important;   /* etiqueta */
+}
+.detalle .kpi b {
+  color: #111827 !important;   /* valor */
+  font-weight: 700;
+  font-style: normal;           /* quitar cursiva del valor */
+}
+
+/* Botón “Nueva búsqueda” en visible (deja de ser fantasma) */
+.footer-actions .btn.ghost {
+  background: #2d89ef !important;
+  color: #fff !important;
+  border: 1px solid #2d89ef !important;
+}
+.footer-actions .btn.ghost:hover {
+  background: #256fbe !important;
+  border-color: #256fbe !important;
+}

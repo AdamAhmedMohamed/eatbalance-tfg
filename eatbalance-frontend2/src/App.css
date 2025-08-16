@@ -1,0 +1,144 @@
+/* App.css */
+
+/* Centra il contenuto dell'app */
+.App {
+  text-align: center;
+}
+
+/* Rendi il logo dinamico e adattabile al viewport */
+.App-logo {
+  height: 40vmin; /* Adatta la dimensione in base al viewport */
+  max-width: 100%; /* Non superare la larghezza del contenitore */
+  pointer-events: none; /* Disabilita l'interazione con il logo */
+  transition: transform 0.3s ease; /* Aggiungi una transizione per l'effetto hover */
+}
+
+/* Animazione del logo solo se non si preferisce ridurre il movimento */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* Header centrale con un design dinamico */
+.App-header {
+  background-color: #90BE6D;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin); /* Dimensione del font dinamica */
+  color: white;
+  padding: 20px; /* Padding dinamico per evitare che il contenuto si tocchi */
+  text-align: center;
+}
+
+/* Link dinamico con effetti al passaggio del mouse */
+.App-link {
+  color: #61dafb;
+  font-size: 1.2rem; /* Aumenta la dimensione del font */
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease; /* Aggiungi transizioni per gli effetti */
+}
+
+.App-link:hover {
+  color: #4fa3ff;
+  transform: scale(1.1); /* Effetto di ingrandimento al passaggio del mouse */
+}
+
+/* Animazione del logo (ruotare 360 gradi) */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ottimizzazione per schermi più piccoli (telefonini) */
+@media (max-width: 600px) {
+  .App-logo {
+    height: 30vmin; /* Logo più piccolo su schermi piccoli */
+  }
+
+  .App-header {
+    font-size: calc(12px + 3vmin); /* Aumenta leggermente la dimensione del font sui dispositivi piccoli */
+  }
+
+  .App-link {
+    font-size: 1.1rem; /* Rende i link più grandi su schermi piccoli */
+  }
+}
+
+/* Ottimizzazione per schermi di tablet */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: calc(12px + 2vmin); /* Modifica la dimensione del font per schermi di tablet */
+  }
+
+  .App-logo {
+    height: 35vmin; /* Dimensione del logo ottimizzata per tablet */
+  }
+
+  .App-link {
+    font-size: 1.15rem;
+  }
+}
+
+/* Per schermi desktop molto grandi */
+@media (min-width: 1200px) {
+  .App-header {
+    font-size: calc(10px + 2vmin); /* Mantieni la dimensione del font su schermi molto grandi */
+  }
+
+  .App-logo {
+    height: 50vmin; /* Logo più grande sui dispositivi desktop */
+  }
+}
+
+/* Aggiungi questo nel tuo CSS */
+@font-face {
+  font-family: 'GothamRounded';
+  src: url('Fonts/GothamRounded-LightItalic.otf') format('opentype'); /* Cambia il formato se necessario */
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "VarelaRound";
+  src: url("Fonts/VarelaRound-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Usa il font nel tuo sito */
+body {
+  font-family: 'GothamRounded', sans-serif;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #5d95ca;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  width: 300px;  /* Aumenta el ancho para que el texto se alargue */
+  height: 50px;  /* Asegura una altura fija */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;  /* Permite que el texto se ajuste si es largo */
+  word-wrap: break-word;  /* Ajusta el texto en varias líneas si es necesario */
+}
+
+

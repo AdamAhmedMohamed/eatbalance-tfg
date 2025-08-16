@@ -1,0 +1,103 @@
+/* Curso BDD y Automatización E2E */
+
+.curso-bdd {
+    font-family: 'GothamRounded';
+    padding: 2rem;
+    background-image: url(/public/fondo.jpg);
+  }
+  
+  .hero-section {
+    position: relative;
+    text-align: center;
+    color: white;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Fondo oscuro difuminado como capa superpuesta */
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+    backdrop-filter: blur(4px);
+    z-index: 1;
+  }
+  
+  /* Imagen de fondo */
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the container without distortion */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  /* Texto por encima del fondo */
+  .hero-title,
+  .hero-subtitle {
+    position: relative;
+    z-index: 2;
+    margin: 12px 24px;
+  }
+  
+  .hero-title {
+    font-size: 300%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+    color: #ebc870;
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    font-size: 150%;
+    line-height: 1.2;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  /* Módulos e instructor */
+  .modules,
+  .instructor {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modules h2,
+  .instructor h2 {
+    color: #007acc;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modules ul li {
+    margin-bottom: 0.8rem;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  
+    .curso-bdd {
+      padding: 2rem 1rem;
+    }
+  }

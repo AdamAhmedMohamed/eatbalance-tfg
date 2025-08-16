@@ -1,0 +1,140 @@
+:root{
+  --bg: #0f172a;
+  --card: rgba(15, 23, 42, 0.6);
+  --border: rgba(255,255,255,.10);
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --accent-dark: #0ea5b7;
+}
+
+/* Sección con fondo (coloca /fondo.jpg en /public) */
+.contact{
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background: var(--bg) url("/fondo.jpg") center/cover no-repeat fixed;
+  overflow: hidden;
+}
+
+/* Velo/overlay para contraste del card */
+.contact__overlay{
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 120% at 100% 0%, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.65) 100%);
+  pointer-events: none;
+}
+
+/* Tarjeta principal (glass) */
+.contact__card{
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+/* Encabezado superior */
+.contact__kicker{
+  margin: 0;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--accent);
+}
+
+.contact__title{
+  margin: 6px 0 4px;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.contact__subtitle{
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+.contact__subtitle a{
+  color: var(--accent);
+  text-decoration: none;
+}
+.contact__subtitle a:hover{ text-decoration: underline; }
+
+/* Layout de inputs */
+.input-row{
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 720px){
+  .input-row{ grid-template-columns: 1fr 1fr; }
+}
+
+.input-box{
+  display: grid;
+  gap: 8px;
+}
+
+.input-box label{
+  font-size: .95rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  text-transform: none;
+}
+
+/* Campos */
+.field{
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(2,6,23,.6);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.field::placeholder{ color: #9aa6b2; }
+.field:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(34,211,238,.18);
+  background: rgba(2,6,23,.75);
+}
+.field.mess{
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* Botón */
+button{
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #06121b;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  box-shadow: 0 12px 30px rgba(34,211,238,.25);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+  margin-top: 14px;
+}
+button:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+button:disabled{ opacity: .6; cursor: not-allowed; transform: none; }
+
+/* Honeypot oculto (anti-spam) */
+.hp{
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
