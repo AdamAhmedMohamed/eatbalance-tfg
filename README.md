@@ -26,14 +26,15 @@
    
 4. Actualiza pip e instala dependencias:
    **python -m pip install --upgrade pip**
+   
     **pip install -r requirements.txt**
 
-5. Lanza el servidor con Uvicorn:
+6. Lanza el servidor con Uvicorn:
     **uvicorn main:app --reload**
     (Si no funciona, prueba:
     **python -m uvicorn main:app --reload**)
 
- 6. Se abre el navegador http://127.0.0.1:8000.
+ 7. Se abre el navegador http://127.0.0.1:8000.
 
 Pero Swagger con endpoints: **http://127.0.0.1:8000/docs**
 
