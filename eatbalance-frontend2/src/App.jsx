@@ -11,8 +11,6 @@ import Contact from './components/Contact/Contact';
 import CalcularPlan from './components/Herramientas/CalcularPlan';
 import GenerarMenus from './components/Herramientas/GenerarMenus';
 import ResumenHerramientas from './components/Herramientas/ResumenHerramientas';
-
-import Colaborar from './components/Contact/Colaborar';
 import ChatbotWidget from './components/Chatbot/Chatbot'; // Importa il tuo chatbot
 
 
@@ -40,7 +38,6 @@ const App = () => {
           <Route path="/curso" element={<CalcularPlan />} />
           <Route path="/bdd-automatizacion" element={<GenerarMenus />} />
           <Route path="/resumen" element={<ResumenHerramientas />} /> {/* Ruta para el componente Resumen */}
-          <Route path="/colaborar" element={<Colaborar />} />
         </Routes>
       </div>
       <ChatbotWidget />

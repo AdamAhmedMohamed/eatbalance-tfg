@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import re
 import asyncio
-
+from routers.plan import router as plan_router
 from bmr import calcular_bmr
 from tdee import calcular_tdee
 from macros import calcular_macros
@@ -16,12 +16,16 @@ from ollama_client import consultar_chat_ollama
 
 app = FastAPI()
 
+# ⚠️ Solo para desarrollo. Abre todo.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],      # en producción limita a tu dominio
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(plan_router)
 
 # ---------------- Raíz ----------------
 @app.get("/")

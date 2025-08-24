@@ -18,6 +18,45 @@ export default function Alimentos() {
   // 👉 cantidad en gramos para la calculadora
   const [grams, setGrams] = useState(100);
 
+  // === SUMATORIO (aislado) ===
+  const [seleccion, setSeleccion] = useState([]); // [{id,name,brand,grams,kcal,prot,carb,gras}]
+  const addActual = () => {
+    if (!sel || !scaled) return;
+    const toNum = (v) => (Number.isFinite(+v) ? +v : 0);
+    setSeleccion((s) => [
+      ...s,
+      {
+        id: Date.now() + Math.random(),
+        code: sel.code || "",
+        name: sel.name || "Alimento",
+        brand: sel.brand || "",
+        grams: toNum(scaled.grams),
+        kcal: toNum(scaled.cal),
+        prot: toNum(scaled.prot),
+        carb: toNum(scaled.carb),
+        gras: toNum(scaled.gras),
+      },
+    ]);
+  };
+  const removeItem = (id) => setSeleccion((s) => s.filter((x) => x.id !== id));
+  const clearAll = () => setSeleccion([]);
+
+  const totals = useMemo(() => {
+    return seleccion.reduce(
+      (a, it) => ({
+        grams: a.grams + (it.grams || 0),
+        kcal: a.kcal + (it.kcal || 0),
+        prot: a.prot + (it.prot || 0),
+        carb: a.carb + (it.carb || 0),
+        gras: a.gras + (it.gras || 0),
+      }),
+      { grams: 0, kcal: 0, prot: 0, carb: 0, gras: 0 }
+    );
+  }, [seleccion]);
+
+  const d0 = (n) => Math.round(Number(n || 0));
+  const d1 = (n) => (Number.isFinite(+n) ? (+n).toFixed(1) : "0.0");
+
   // Normaliza lista OFF → {code, name, brand, image}
   const normalizaLista = (raw) => {
     const arr = Array.isArray(raw)
@@ -159,15 +198,20 @@ export default function Alimentos() {
   const fmtKcal = (v) => (v == null ? "—" : Math.round(v));
 
   return (
-    <div className="Partnership">
-      {/* HERO */}
-      <div className="hero-section">
-        <img src="/logo-eatbalance.png" className="hero-image" alt="" />
-        <h1 className="hero-title">CONSULTA&nbsp;ALIMENTOS</h1>
-        <p className="hero-subtitle">
-          Busca calorías y macros de productos de supermercado en España.
-        </p>
-      </div>
+      <div className="Partnership">
+        {/* HERO */}
+        <div className="hero-section">
+    <img src="/logo-eatbalance.png" className="hero-image" alt="" />
+    <div className="hero-glass">
+      <h1 className="hero-title">
+        <span className="lead">Consulta</span> <span className="accent">Alimentos</span>
+      </h1>
+      <p className="hero-subtitle">
+        Busca calorías y macros de productos de supermercado en España.
+      </p>
+    </div>
+  </div>
+
 
       {/* Tarjeta única: Productos / marcas (OFF) */}
       <div className="search-grid">
@@ -336,6 +380,17 @@ export default function Alimentos() {
                 <p className="calc-note">
                   * Cálculo basado en los valores por 100 g del producto.
                 </p>
+
+                {/* === SUMATORIO: botón para añadir la selección actual === */}
+                <div className="sum-actions">
+                  <button
+                    type="button"
+                    className="btn add-food-btn"
+                    onClick={addActual}
+                  >
+                    ➕ Añadir alimento
+                  </button>
+                </div>
               </div>
 
               <div className="footer-actions">
@@ -346,6 +401,75 @@ export default function Alimentos() {
             </div>
           )}
         </div>
+
+        {/* === SUMATORIO: panel acumulado, fuera del detalle para que siempre se vea === */}
+        {seleccion.length > 0 && (
+          <div className="sum-card">
+            <div className="sum-head">
+              <div className="sum-title">
+                Tu selección <span className="sum-count">{seleccion.length}</span>
+              </div>
+              <div className="sum-tools">
+                <button type="button" className="sum-clear" onClick={clearAll}>
+                  Vaciar
+                </button>
+              </div>
+            </div>
+
+            <div className="sum-table-wrap">
+              <table className="sum-table">
+                <thead>
+                  <tr>
+                    <th>Alimento</th>
+                    <th className="tr">Gramos</th>
+                    <th className="tr">kcal</th>
+                    <th className="tr">P</th>
+                    <th className="tr">C</th>
+                    <th className="tr">G</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {seleccion.map((it) => (
+                    <tr key={it.id}>
+                      <td>
+                        <div className="sum-food">
+                          <div className="sum-name">{it.name}</div>
+                          {it.brand && <div className="sum-brand">{it.brand}</div>}
+                        </div>
+                      </td>
+                      <td className="tr">{d0(it.grams)}</td>
+                      <td className="tr">{d0(it.kcal)}</td>
+                      <td className="tr">{d1(it.prot)}</td>
+                      <td className="tr">{d1(it.carb)}</td>
+                      <td className="tr">{d1(it.gras)}</td>
+                      <td className="tr">
+                        <button
+                          type="button"
+                          className="sum-del"
+                          onClick={() => removeItem(it.id)}
+                        >
+                          ×
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="sum-total">
+                    <td>Totales</td>
+                    <td className="tr">{d0(totals.grams)}</td>
+                    <td className="tr">{d0(totals.kcal)}</td>
+                    <td className="tr">{d1(totals.prot)}</td>
+                    <td className="tr">{d1(totals.carb)}</td>
+                    <td className="tr">{d1(totals.gras)}</td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

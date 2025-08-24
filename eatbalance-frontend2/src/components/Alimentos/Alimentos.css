@@ -9,8 +9,6 @@
   overflow: hidden;
 }
 
-
-
 .hero-image {
   position: absolute;
   inset: 0;
@@ -47,7 +45,6 @@
   gap: 22px;
   padding: 24px 16px 48px;
 }
-
 
 @media (min-width: 980px) {
   .search-grid { grid-template-columns: 1fr 1fr; }
@@ -311,4 +308,312 @@
 .footer-actions .btn.ghost:hover {
   background: #256fbe !important;
   border-color: #256fbe !important;
+}
+
+/* Alturas base */
+html, body, #root { height: 100%; }
+
+/* Contenedor raíz en columna */
+#root, body {
+  min-height: 100vh;
+  min-height: 100dvh;        /* mejor en móviles modernos */
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido ocupa el espacio disponible */
+.page-main { 
+  flex: 1 0 auto;
+}
+
+/* El footer baja solo */
+.site-footer, footer {
+  margin-top: auto;
+  position: static;          /* por si antes estaba fixed/absolute */
+}
+
+/* ===== Hero nítido para la página de Alimentos (no usado si ya usas .hero-section) ===== */
+.al-hero{
+  --hero-img: url("/logo-eatbalance.png");
+  --hero-h: clamp(420px, 48vh, 620px);
+  --gap-after-hero: clamp(24px, 4vh, 56px);
+  position: relative;
+  min-height: var(--hero-h);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 0 0 var(--gap-after-hero) 0;
+  overflow: hidden;
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.62) 0 34%, rgba(0,0,0,0) 60%),
+    linear-gradient(90deg, transparent 0 96%, #eef2f7 98%, #eef2f7 100%),
+    var(--hero-img),
+    linear-gradient(180deg,#f8fafc 0%, #eef2f7 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% 100%, cover, 100% 100%;
+  background-position: left center, left center, center center, center center;
+}
+.al-hero-inner, .al-hero h1, .al-hero p { position: relative; z-index: 2; }
+.al-hero-inner{
+  display: inline-block;
+  max-width: 980px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.28));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.al-title{
+  margin: 0 0 6px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  line-height: 1.05;
+  font-size: clamp(28px, 4.2vw, 56px);
+  color: #fff;
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+.al-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 45%,#84cc16 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+.al-title .accent::after{
+  content:"";
+  display:block;
+  height: 6px;
+  width: 56%;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#34d399,#22c55e,#84cc16);
+  opacity:.8;
+}
+.al-subtitle{
+  margin: 0;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #eaf2ff;
+  opacity: .95;
+}
+
+/* (Opcional) si tu navbar es fixed, añade aire arriba del contenido */
+.Partnership { padding-top: 0; }
+
+/* ====== SUMATORIO – estilos aislados ====== */
+.sum-actions{ margin-top:10px; }
+.sum-actions .add-food-btn{
+  background:#10b981;
+}
+.sum-actions .add-food-btn:hover{
+  background:#0ea37a;
+}
+
+.sum-card{
+  width:100%;
+  max-width:1100px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+.sum-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; }
+.sum-title{ font-weight:700; color:#111827; }
+.sum-count{
+  margin-left:6px;
+  display:inline-grid; place-items:center;
+  min-width:22px; height:22px; padding:0 6px;
+  font-size:12px;
+  border-radius:999px;
+  background:#2d89ef; color:#fff;
+}
+
+.sum-tools{ display:flex; gap:8px; }
+.sum-clear{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111827;
+  border-radius:8px;
+  padding:6px 10px;
+  cursor:pointer;
+}
+.sum-clear:hover{ background:#f3f4f6; }
+
+.sum-table-wrap{ overflow:auto; }
+.sum-table{ width:100%; border-collapse:collapse; }
+.sum-table th, .sum-table td{
+  padding:8px 6px; border-top:1px solid #e5e7eb; font-size:14px; color:#111827;
+}
+.sum-table thead th{ border-top:none; color:#6b7280; font-weight:600; text-align:left; }
+.tr{ text-align:right; }
+.sum-total td{ font-weight:800; }
+
+.sum-food{ display:flex; flex-direction:column; }
+.sum-name{ font-weight:600; color:#111827; }
+.sum-brand{ font-size:12px; color:#6b7280; }
+
+.sum-del{
+  border:1px solid #e5e7eb;
+  background:#fff; color:#6b7280;
+  width:28px; height:28px; border-radius:8px; cursor:pointer;
+}
+.sum-del:hover{ background:#ffecec; border-color:#fca5a5; color:#b91c1c; }
+
+
+/* ===== HERO nítido como “Calcula tu plan” ===== */
+/* Ocultamos la <img> antigua para que no haga blur ni distorsione */
+.hero-image { display: none !important; }
+
+/* Contenedor del hero con la misma técnica de capas (scrim + fade + foto) */
+.hero-section{
+  /* misma altura cómoda que usas en otras páginas */
+  --hero-h: clamp(420px, 48vh, 620px);
+  --gap-after-hero: clamp(24px, 4vh, 56px);
+
+  position: relative;
+  min-height: var(--hero-h);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;                /* deja tu título/subtítulo igual */
+  margin: 0 0 var(--gap-after-hero) 0;
+  overflow: hidden;
+
+  /* Capas: scrim izquierda (para legibilidad) + fade derecha + foto + fondo */
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.62) 0 34%, rgba(0,0,0,0) 60%),
+    linear-gradient(90deg, transparent 0 96%, #eef2f7 98%, #eef2f7 100%),
+    url("/logo-eatbalance.png"),
+    linear-gradient(180deg,#f8fafc 0%, #eef2f7 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% 100%, cover, 100% 100%;
+  background-position: left center, left center, center center, center center;
+}
+
+/* Título y subtítulo ya estaban OK; dejamos el mismo estilo.
+   Si quieres un poco más de punch, puedes activar este pequeño brillo: */
+.hero-title { text-shadow: 0 6px 22px rgba(0,0,0,.35); }
+.hero-subtitle { opacity: .95; }
+
+/* ===== Título hero con doble subrayado (blanco / verde) ===== */
+.hero-title{
+  color: #fff !important;              /* sobreescribe el dorado */
+  margin: 0 0 2px !important;
+  line-height: 1.02;
+  letter-spacing: .3px;
+}
+
+.hero-title .lead,
+.hero-title .accent{
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;                 /* acerca el subrayado al texto */
+}
+
+/* Base de los subrayados */
+.hero-title .lead::after,
+.hero-title .accent::after{
+  content: "";
+  position: absolute;
+  bottom: -3px;                        /* muy pegado al texto */
+  height: 4px;                         /* grosor fino; sube a 5px si lo quieres más marcado */
+  border-radius: 999px;
+}
+
+/* “Consulta” → blanco, ligeramente más corto */
+.hero-title .lead::after{
+  left: 4%;
+  right: 4%;                           /* ≈92% del ancho de la palabra */
+  background: rgba(255,255,255,.92);
+}
+
+/* “Alimentos” → texto y subrayado en verde degradado */
+.hero-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+.hero-title .accent::after{
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+}
+
+/* Menos aire con el subtítulo */
+.hero-subtitle{
+  margin-top: 4px !important;
+  opacity: .95;
+}
+
+
+/* Alinear a la izquierda el bloque del hero */
+.hero-section{
+  justify-items: start !important;   /* del grid */
+  text-align: left !important;
+  padding-left: clamp(12px, 4vw, 28px) !important;
+}
+
+/* Caja “glass” para título + subtítulo */
+.hero-glass{
+  display: inline-block;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.28));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* Título: dos tonos con subrayado a juego */
+.hero-title{
+  margin: 0 0 4px !important;
+  font-weight: 900;
+  letter-spacing: .3px;
+  line-height: 1.04;
+  color: #fff;                       /* sobreescribe el dorado */
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+
+/* Palabras subrayadas finas y pegadas al texto */
+.hero-title .lead,
+.hero-title .accent{
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.hero-title .lead::after,
+.hero-title .accent::after{
+  content: "";
+  position: absolute;
+  bottom: -3px;                      /* muy pegado al texto */
+  height: 4px;
+  border-radius: 999px;
+}
+
+/* “Consulta” → blanco, un poco más corto */
+.hero-title .lead::after{
+  left: 4%;
+  right: 4%;
+  background: rgba(255,255,255,.92);
+}
+
+/* “Alimentos” → verde degradado + subrayado a juego */
+.hero-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+.hero-title .accent::after{
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+}
+
+/* Menos aire con el subtítulo */
+.hero-subtitle{
+  margin-top: 4px !important;
+  opacity: .95;
 }

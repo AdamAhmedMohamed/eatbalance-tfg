@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./CalcularPlan.css";
 
+// === RUTA REAL DE TU PÁGINA DE MENÚS ===
+const MENUS_PATH = "/bdd-automatizacion"; // <-- aquí tu ruta correcta
+
 const initialBotMessage = () => ({
   from: "bot",
   text: (
@@ -23,7 +26,8 @@ const initialBotMessage = () => ({
       <br />
       Por ejemplo: <br />
       <em>
-        "Tengo 20 años, peso 75 kg, mido 173 cm, soy hombre, tengo actividad moderada y quiero mantenimiento"
+        "Tengo 20 años, peso 75 kg, mido 173 cm, soy hombre, tengo actividad moderada y quiero
+        mantenimiento"
       </em>
       <br />
       ¡Escríbelo y te calculo tu plan!
@@ -42,6 +46,58 @@ export default function CalcularPlan() {
     setMessages([initialBotMessage()]);
     setInput("");
     setLoading(false);
+  };
+
+  // Construye el objeto de pre-relleno (kcal y macros) a partir del plan recibido (SIN redondear)
+const buildPrefillFromPlan = (p) => {
+  if (!p) return null;
+
+  // kcal: prioriza calorías objetivo si existe; si no, usa TDEE (sin Math.round)
+  const kcal = Number(p.calorias_objetivo ?? p.tdee);
+  const protein_g = Number(p.proteinas ?? 0);
+  const carb_g    = Number(p.carbohidratos ?? 0);
+  const fat_g     = Number(p.grasas ?? 0);
+
+  return { kcal, protein_g, carb_g, fat_g };
+};
+
+
+  // Navega a /bdd-automatizacion pasando los macros por querystring
+  const handleGoGenerateMenus = () => {
+    if (!plan) return;
+
+    const prefill = buildPrefillFromPlan(plan);
+    if (!prefill) return;
+
+    // Backup por si el usuario llega sin query params
+    try {
+      sessionStorage.setItem("prefillTotals", JSON.stringify(prefill));
+    } catch {
+      /* nada */
+    }
+
+    // Construimos la query
+    const qs = new URLSearchParams({
+      kcal: String(prefill.kcal),
+      protein_g: String(prefill.protein_g),
+      carb_g: String(prefill.carb_g),
+      fat_g: String(prefill.fat_g),
+      // Puedes añadir valores por defecto si quieres:
+      // scheme: "4",
+      // top_n: "5",
+    }).toString();
+
+    const target = `${MENUS_PATH}?${qs}`;
+
+    // Si tu app usa HashRouter (URLs del estilo /#/ruta), navegamos con hash
+    const isHashRouter = window.location.hash.startsWith("#/");
+    if (isHashRouter) {
+      const base = window.location.href.split("#")[0];
+      window.location.replace(`${base}#${target}`);
+    } else {
+      // Navegación normal (BrowserRouter o páginas estáticas)
+      window.location.href = target;
+    }
   };
 
   const handleSend = async () => {
@@ -117,12 +173,19 @@ export default function CalcularPlan() {
 
   return (
     <div className="curso-calidad-software">
-      {/* HERO */}
-      <section className="hero-section">
-        <img src="/logo-eatbalance.png" alt="EatBalance" className="hero-image" />
-        <h1 className="hero-title">CALCULA TU PLAN<br />NUTRICIONAL</h1>
-        <p className="hero-subtitle">Introduce tus datos personales y obtén tu plan personalizado.</p>
-      </section>
+      {/* HERO limpio (nítido, sin blur) */}
+<section className="cp-hero">
+  <div className="cp-hero-inner">
+    <h1 className="cp-title">
+  <span className="lead">Calcula tu</span> <span className="accent">Plan</span><br/>
+  <span className="accent">Nutricional</span>
+    </h1>
+
+    <p className="cp-subtitle">
+      Introduce tus datos personales y obtén tu plan personalizado.
+    </p>
+  </div>
+</section>
 
       {/* Chat */}
       <div className="chat-container">
@@ -135,9 +198,10 @@ export default function CalcularPlan() {
 
           {plan && (
             <div className="chat-actions">
-              <a href="/generar-menus" className="boton-generar">
+              {/* Ahora: usar handler que pasa kcal y macros por querystring hacia /bdd-automatizacion */}
+              <button className="boton-generar" onClick={handleGoGenerateMenus}>
                 Generar menús personalizados →
-              </a>
+              </button>
               <button className="boton-calcular" onClick={resetChat}>
                 ↻ Calcular tu plan
               </button>

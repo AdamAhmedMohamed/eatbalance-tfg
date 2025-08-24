@@ -1,136 +1,151 @@
-:root{
-  --bg: #0f172a;
-  --card: rgba(15, 23, 42, 0.6);
-  --border: rgba(255,255,255,.10);
-  --text: #e5e7eb;
-  --muted: #94a3b8;
-  --accent: #22d3ee;
-  --accent-dark: #0ea5b7;
+/* ===== Variables solo dentro de Contact ===== */
+.contact{
+  --bg: #0b1220;
+  --text: #0f172a;
+  --muted: #475569;
+  --card: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.14);
+  --g1: #34d399;
+  --g2: #22c55e;
+  --g3: #84cc16;
+  --accent: var(--g2);
 }
 
-/* Sección con fondo (coloca /fondo.jpg en /public) */
+/* Fondo igual a otras páginas: logo nítido + scrim + fade */
 .contact{
-  position: relative;
   min-height: 100vh;
+  padding: 8px 16px 32px;
   display: grid;
   place-items: center;
-  padding: 32px 16px;
-  background: var(--bg) url("/fondo.jpg") center/cover no-repeat fixed;
+  position: relative;
   overflow: hidden;
+
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.62) 0 34%, rgba(0,0,0,0) 60%),
+    linear-gradient(90deg, transparent 0 96%, #eef2f7 98%, #eef2f7 100%),
+    url("/logo-eatbalance.png"),
+    linear-gradient(180deg,#f8fafc 0%, #eef2f7 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, cover, 100% 100%;
+  background-position: left center, left center, center center, center center;
 }
 
-/* Velo/overlay para contraste del card */
-.contact__overlay{
+/* Velo sutil */
+.contact .contact__overlay{
   position: absolute; inset: 0;
-  background: radial-gradient(120% 120% at 100% 0%, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.65) 100%);
+  background: radial-gradient(120% 120% at 100% 0%, rgba(0,0,0,.20) 0%, rgba(0,0,0,.38) 60%, rgba(0,0,0,.50) 100%);
   pointer-events: none;
 }
 
-/* Tarjeta principal (glass) */
-.contact__card{
+/* Tarjeta (clara + glass leve, coherente con Alimentos) */
+.contact .contact__card{
   position: relative;
   width: 100%;
-  max-width: 760px;
-  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
+  max-width: 820px;
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid #e5e7eb;
   border-radius: 18px;
-  padding: 28px;
-  color: var(--text);
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  padding: clamp(18px, 3.2vw, 28px);
+  color: #111827;
+  box-shadow: 0 18px 40px rgba(2,6,23,.25);
 }
 
-/* Encabezado superior */
-.contact__kicker{
+/* Encabezado */
+.contact .contact__kicker{
   margin: 0;
   letter-spacing: .12em;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: .85rem;
-  color: var(--accent);
+  font-weight: 800;
+  font-size: .82rem;
+  color: var(--g2);
 }
-
-.contact__title{
+.contact .contact__title{
   margin: 6px 0 4px;
-  font-size: 2rem;
-  line-height: 1.2;
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.15;
+  color: #0b1220;
+  font-weight: 900;
+  letter-spacing: .2px;
 }
-
-.contact__subtitle{
+.contact .contact__subtitle{
   margin: 0 0 16px;
-  color: var(--muted);
+  color: #334155;
 }
-.contact__subtitle a{
-  color: var(--accent);
+.contact .contact__subtitle a{
+  color: var(--g2);
   text-decoration: none;
+  font-weight: 600;
 }
-.contact__subtitle a:hover{ text-decoration: underline; }
+.contact .contact__subtitle a:hover{ text-decoration: underline; }
 
 /* Layout de inputs */
-.input-row{
-  display: grid;
-  gap: 14px;
-}
+.contact .input-row{ display: grid; gap: 14px; }
 @media (min-width: 720px){
-  .input-row{ grid-template-columns: 1fr 1fr; }
+  .contact .input-row{ grid-template-columns: 1fr 1fr; }
 }
-
-.input-box{
-  display: grid;
-  gap: 8px;
-}
-
-.input-box label{
+.contact .input-box{ display: grid; gap: 8px; }
+.contact .input-box label{
   font-size: .95rem;
-  font-weight: 600;
-  color: #cbd5e1;
-  text-transform: none;
+  font-weight: 700;
+  color: #0b1220;
 }
 
 /* Campos */
-.field{
+.contact .field{
   width: 100%;
   border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(2,6,23,.6);
+  border: 1px solid #cfd4dc;
+  background: #ffffff;
   color: var(--text);
   padding: 12px 14px;
   font-size: 1rem;
   outline: none;
-  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
 }
-.field::placeholder{ color: #9aa6b2; }
-.field:focus{
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(34,211,238,.18);
-  background: rgba(2,6,23,.75);
+.contact .field::placeholder{ color: #8a99a8; }
+.contact .field:focus{
+  border-color: var(--g2);
+  box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+  background: #ffffff;
 }
-.field.mess{
-  min-height: 160px;
-  resize: vertical;
-}
+.contact .field.mess{ min-height: 160px; resize: vertical; }
 
-/* Botón */
-button{
+/* Botón SOLO de Contact (nada global) */
+.contact .contact__btn{
   width: 100%;
   padding: 12px 16px;
   border: 0;
   border-radius: 14px;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.05rem;
   cursor: pointer;
-  color: #06121b;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-  box-shadow: 0 12px 30px rgba(34,211,238,.25);
+  color: #062a13;
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 55%, var(--g3) 100%);
+  box-shadow: 0 14px 30px rgba(34,197,94,.25);
   transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
   margin-top: 14px;
 }
-button:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-button:disabled{ opacity: .6; cursor: not-allowed; transform: none; }
+.contact .contact__btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+.contact .contact__btn:disabled{ opacity: .7; cursor: not-allowed; transform: none; }
 
-/* Honeypot oculto (anti-spam) */
-.hp{
+/* Spinner local */
+@keyframes contact-spin { to { transform: rotate(360deg); } }
+.contact .contact__btn.is-loading{ position: relative; pointer-events: none; }
+.contact .contact__btn.is-loading::after{
+  content: "";
+  position: absolute;
+  right: 16px; top: 50%;
+  width: 16px; height: 16px; margin-top: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.9);
+  border-top-color: rgba(6, 42, 19, .6);
+  animation: contact-spin .8s linear infinite;
+}
+
+/* Honeypot */
+.contact .hp{
   position: absolute !important;
   left: -9999px !important;
   width: 1px !important;

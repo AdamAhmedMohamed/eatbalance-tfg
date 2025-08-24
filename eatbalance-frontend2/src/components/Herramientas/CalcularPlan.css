@@ -1,3 +1,7 @@
+/* ====== FIX: quitar márgenes por defecto del documento ====== */
+html, body { margin: 0; }
+
+/* ====== Chat ====== */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -73,3 +77,134 @@
   font-style: italic;
 }
 
+/* ===== Hero nítido para Calcular Plan ===== */
+.cp-hero{
+  --hero-img: url("/logo-eatbalance.png");
+  --hero-h: clamp(420px, 48vh, 620px);
+  --gap-after-hero: clamp(16px, 3vh, 40px);   /* un poco menos de aire abajo */
+
+  position: relative;
+  min-height: var(--hero-h);
+  border: 1px solid #e5e7eb;
+  border-top-left-radius: 0;                 /* pegado al navbar */
+  border-top-right-radius: 0;                /* pegado al navbar */
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding: 18px;
+  margin: 0 0 var(--gap-after-hero) 0;       /* SIN margen arriba */
+  overflow: hidden;
+
+  /* Scrim izquierda + fade derecha + foto + fondo */
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.62) 0 34%, rgba(0,0,0,0) 60%),
+    linear-gradient(90deg, transparent 0 96%, #eef2f7 98%, #eef2f7 100%),
+    var(--hero-img),
+    linear-gradient(180deg,#f8fafc 0%, #eef2f7 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% 100%, cover, 100% 100%;
+  background-position: left center, left center, center center, center center;
+}
+
+/* Contenido por encima del fondo */
+.cp-hero-inner, .cp-hero h1, .cp-hero p { position: relative; z-index: 2; }
+
+/* Caja glass para texto */
+.cp-hero-inner{
+  display: inline-block;
+  max-width: 980px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.28));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* Título y subtítulo */
+.cp-title{
+  margin: 0 0 6px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  line-height: 1.05;
+  font-size: clamp(28px, 4.2vw, 56px);
+  color: #fff;
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+.cp-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 45%,#84cc16 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+.cp-title .accent::after{
+  content:"";
+  display:block;
+  height: 6px;
+  width: 56%;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#34d399,#22c55e,#84cc16);
+  opacity:.8;
+}
+.cp-subtitle{
+  margin: 0;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #eaf2ff;
+  opacity: .95;
+}
+
+/* ===== Wrapper de la página (menos margen superior) ===== */
+.curso-calidad-software { 
+  padding-top: 0 !important;           /* pon 0 si no se solapa con el navbar */
+}
+
+/* Por si algún estilo añade margen al hero */
+.cp-hero { margin-top: 0 !important; }
+
+
+/* ===== Underlines y compacidad del título ===== */
+.cp-title{
+  /* un poco más compacto para que “Nutricional” quede más arriba */
+  margin: 0 0 4px !important;
+  line-height: 1.02;
+}
+
+/* Parte blanca: “Calcula tu” con subrayado blanco */
+.cp-title .lead{
+  position: relative;
+  display: inline-block;
+}
+.cp-title .lead::after{
+  content: "";
+  display: block;
+  height: 6px;
+  width: 100%;                  /* subrayado al ancho del texto */
+  max-width: 420px;             /* evita que se pase demasiado */
+  margin-top: 4px;              /* sube el subrayado (menos espacio) */
+  border-radius: 999px;
+  background: rgba(255,255,255,.95);   /* blanco */
+  opacity: .95;
+}
+
+/* Parte verde: ya tenías el gradiente; lo aplicamos también a Nutricional */
+.cp-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 45%,#84cc16 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+  position: relative;
+  display: inline-block;
+}
+
+/* Subrayado verde para cada .accent (Plan y Nutricional) */
+.cp-title .accent::after{
+  content:"";
+  display:block;
+  height: 6px;
+  width: 100%;                  /* sigue el ancho del texto verde */
+  margin-top: 4px;              /* menos espacio */
+  border-radius: 999px;
+  background: linear-gradient(90deg,#34d399,#22c55e,#84cc16);
+  opacity:.9;
+}
