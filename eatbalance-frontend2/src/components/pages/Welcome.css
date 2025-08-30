@@ -1,0 +1,203 @@
+/* ───────── Ocultar navbar y chatbot SOLO en /welcome ───────── */
+body.welcome-page .navbar { display: none !important; }
+body.welcome-page .overlay { display: none !important; }
+/* intenta cubrir la mayoría de widgets llamados Chatbot */
+body.welcome-page [class*="chatbot"],
+body.welcome-page [class*="Chatbot"] { display: none !important; }
+
+/* ───────── Fondo “pro” verde oscuro con destellos ───────── */
+body.welcome-page {
+  background:
+    radial-gradient(1200px 800px at -15% -20%, #0b3b2e 0%, transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, #0d4b39 0%, transparent 55%),
+    linear-gradient(180deg, #06251d 0%, #06251d 100%);
+  min-height: 100vh;
+  color-scheme: light;
+}
+
+/* Stage centrado */
+.wl-stage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 28px 16px 36px;
+  gap: 14px;
+}
+
+/* ───────── HERO estilo estrella (logo con aureola y título con degradado) ───────── */
+.wl-hero {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+  color: #e8fff3;
+}
+
+.wl-logo-wrap {
+  position: relative;
+  width: clamp(84px, 16vw, 128px);
+  aspect-ratio: 1/1;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #1f9f7a 0%, #0b3b2e 60%);
+  box-shadow:
+    0 0 0 2px rgba(255, 215, 0, .20),
+    0 25px 60px rgba(0,0,0,.65);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.wl-logo {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-6px) }
+}
+
+.wl-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(255,215,0,.16) 0%, transparent 60%);
+  filter: blur(12px);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: .4 }
+  50%      { opacity: .9 }
+}
+
+.wl-title {
+  font-weight: 900;
+  letter-spacing: .8px;
+  font-size: clamp(28px, 6vw, 44px);
+  background: linear-gradient(90deg, #f5d26b 0%, #ffffff 40%, #b7ffcd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+
+.wl-tag {
+  margin-top: -2px;
+  color: #c7ffe4;
+  opacity: .9;
+}
+
+/* Aviso de sesión */
+.wl-info {
+  background: rgba(7, 51, 41, .7);
+  border: 1px solid #10b981;
+  color: #d1fae5;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.wl-info button {
+  background: transparent;
+  border: 1px solid #a7f3d0;
+  color: #d1fae5;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ───────── Card ───────── */
+.welcome-card {
+  width: min(92vw, 520px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.92));
+  box-shadow:
+    0 40px 80px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  overflow: hidden;
+}
+
+/* Tabs */
+.welcome-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #e5e7eb;
+}
+.tab-btn {
+  padding: 14px 10px;
+  background: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.tab-btn.is-active {
+  background: linear-gradient(90deg, #0ea5a4, #16a34a);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+
+/* Formulario */
+.welcome-form {
+  padding: 18px 18px 12px;
+  display: grid;
+  gap: 12px;
+}
+.fgroup label {
+  display: block;
+  font-size: 13px;
+  color: #475569;
+  margin-bottom: 4px;
+}
+.fgroup input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 15px;
+}
+
+.welcome-submit {
+  margin-top: 6px;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, #22c55e, #0ea5a4);
+  border: 0;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(16,185,129,.35);
+}
+.welcome-submit:disabled { opacity: .7; cursor: default; }
+
+/* Mensajes */
+.welcome-msg {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.welcome-msg.ok {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+.welcome-msg.err {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+}
+
+/* Footer */
+.welcome-footer {
+  padding: 12px 16px 16px;
+  text-align: center;
+  color: #64748b;
+}

@@ -617,3 +617,14 @@ html, body, #root { height: 100%; }
   margin-top: 4px !important;
   opacity: .95;
 }
+
+
+.g-num { font-weight: 700; }
+.g-unit { font-size: 11px; color: #6b7280; }
+
+/* Encabezados numéricos a la derecha para que queden encima de sus datos */
+.sum-table thead th.tr { text-align: right !important; }
+/* El primer th ("Alimento") sigue a la izquierda */
+.sum-table thead th:first-child { text-align: left !important; }
+
+.sum-table { font-variant-numeric: tabular-nums; } /* números alineados perfecto */

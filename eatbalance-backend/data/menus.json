@@ -10,6 +10,16 @@
     ]
   },
   {
+    "menu_id": "desayuno_qfb_corn_nuts",
+    "meal_type": "desayuno",
+    "menu_name": "Queso fresco batido + Corn Flakes + frutos secos",
+    "items": [
+      {"food_id": "queso_fresco_batido_0", "base_g": 320},
+      {"food_id": "corn_flakes", "base_g": 50},
+      {"food_id": "frutos_secos_mixtos", "base_g": 10}
+    ]
+  },
+  {
     "menu_id": "desayuno_corn_prot_leche_peanut",
     "meal_type": "desayuno",
     "menu_name": "Corn Flakes + proteína + leche + crema cacahuete",
@@ -23,7 +33,7 @@
   {
     "menu_id": "desayuno_pan_huevos_claras",
     "meal_type": "desayuno",
-    "menu_name": "Pan + 2 huevos + claras",
+    "menu_name": "Pan integral + 2 huevos + claras",
     "items": [
       {"food_id": "pan_integral", "base_g": 70},
       {"food_id": "huevo", "base_g": 120},
@@ -31,49 +41,97 @@
     ]
   },
   {
-    "menu_id": "desayuno_crema_arroz_ave_prot_peanut",
+    "menu_id": "desayuno_crema_arroz_prot_peanut",
     "meal_type": "desayuno",
-    "menu_name": "Crema de arroz/Harina de avena + proteína + crema cacahuete",
+    "menu_name": "Crema de arroz + proteína + crema cacahuete",
     "items": [
       {"food_id": "crema_arroz", "base_g": 50},
       {"food_id": "proteina_polvo_whey", "base_g": 40},
       {"food_id": "crema_cacahuete", "base_g": 10}
     ]
   },
+  {
+    "menu_id": "desayuno_avena_prot_peanut",
+    "meal_type": "desayuno",
+    "menu_name": "Harina de avena + proteína + crema cacahuete",
+    "items": [
+      {"food_id": "avena", "base_g": 50},
+      {"food_id": "proteina_polvo_whey", "base_g": 40},
+      {"food_id": "crema_cacahuete", "base_g": 10}
+    ]
+  },
+  {
+    "menu_id": "desayuno_avena_prot_nuts",
+    "meal_type": "desayuno",
+    "menu_name": "Harina de avena + proteína + frutos secos",
+    "items": [
+      {"food_id": "avena", "base_g": 50},
+      {"food_id": "proteina_polvo_whey", "base_g": 40},
+      {"food_id": "frutos_secos_mixtos", "base_g": 10}
+    ]
+  },
 
   {
-    "menu_id": "comida_pasta_arroz_pollo",
+    "menu_id": "comida_pasta_pollo",
     "meal_type": "comida",
-    "menu_name": "Pasta/Arroz (seco) + pechuga de pollo",
+    "menu_name": "Pasta (seco) + pechuga de pollo",
     "items": [
       {"food_id": "pasta_seca", "base_g": 60},
       {"food_id": "pollo_pechuga", "base_g": 250},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["arroz_blanco_seco"]}
+    ]
   },
   {
-    "menu_id": "comida_pasta_arroz_picada",
+    "menu_id": "comida_arroz_pollo",
     "meal_type": "comida",
-    "menu_name": "Pasta/Arroz (seco) + carne picada vacuno magra",
+    "menu_name": "Arroz (seco) + pechuga de pollo",
+    "items": [
+      {"food_id": "arroz_blanco_seco", "base_g": 60},
+      {"food_id": "pollo_pechuga", "base_g": 250},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
+  },
+  {
+    "menu_id": "comida_pasta_picada",
+    "meal_type": "comida",
+    "menu_name": "Pasta (seco) + ternera picada magra",
     "items": [
       {"food_id": "pasta_seca", "base_g": 60},
       {"food_id": "ternera_picada_magra", "base_g": 250},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["arroz_blanco_seco"]}
+    ]
+  },
+  {
+    "menu_id": "comida_arroz_picada",
+    "meal_type": "comida",
+    "menu_name": "Arroz (seco) + ternera picada magra",
+    "items": [
+      {"food_id": "arroz_blanco_seco", "base_g": 60},
+      {"food_id": "ternera_picada_magra", "base_g": 250},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
   },
   {
     "menu_id": "comida_pasta_atun_pollo",
     "meal_type": "comida",
-    "menu_name": "Pasta/Arroz + 2 latas de atún + pollo",
+    "menu_name": "Pasta + 2 latas de atún + pollo",
     "items": [
       {"food_id": "pasta_seca", "base_g": 60},
       {"food_id": "atun_lata_escurrido", "base_g": 112},
       {"food_id": "pollo_pechuga", "base_g": 125},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["arroz_blanco_seco"], "tuna_latas": 2}
+    ]
+  },
+  {
+    "menu_id": "comida_arroz_atun_pollo",
+    "meal_type": "comida",
+    "menu_name": "Arroz + 2 latas de atún + pollo",
+    "items": [
+      {"food_id": "arroz_blanco_seco", "base_g": 60},
+      {"food_id": "atun_lata_escurrido", "base_g": 112},
+      {"food_id": "pollo_pechuga", "base_g": 125},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
   },
   {
     "menu_id": "comida_noquis_pescado_blanco",
@@ -89,13 +147,17 @@
     "menu_id": "comida_extra_queso",
     "meal_type": "comida",
     "menu_name": "Extra queso (opcional)",
-    "items": [{"food_id": "queso_semicurado", "base_g": 20}]
+    "items": [
+      {"food_id": "queso_semicurado", "base_g": 20}
+    ]
   },
   {
     "menu_id": "comida_extra_guacamole",
     "meal_type": "comida",
     "menu_name": "Extra guacamole (opcional)",
-    "items": [{"food_id": "guacamole", "base_g": 55}]
+    "items": [
+      {"food_id": "guacamole", "base_g": 55}
+    ]
   },
 
   {
@@ -140,37 +202,64 @@
   },
 
   {
-    "menu_id": "cena_pasta_arroz_pollo",
+    "menu_id": "cena_pasta_pollo",
     "meal_type": "cena",
-    "menu_name": "Pasta/Arroz (seco) + pechuga de pollo",
+    "menu_name": "Pasta (seco) + pechuga de pollo",
     "items": [
       {"food_id": "pasta_seca", "base_g": 50},
       {"food_id": "pollo_pechuga", "base_g": 250},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["arroz_blanco_seco"]}
+    ]
   },
   {
-    "menu_id": "cena_pan_patata_ternera",
+    "menu_id": "cena_arroz_pollo",
     "meal_type": "cena",
-    "menu_name": "Pan integral o patata + filete de ternera",
+    "menu_name": "Arroz (seco) + pechuga de pollo",
+    "items": [
+      {"food_id": "arroz_blanco_seco", "base_g": 50},
+      {"food_id": "pollo_pechuga", "base_g": 250},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
+  },
+  {
+    "menu_id": "cena_pan_ternera",
+    "meal_type": "cena",
+    "menu_name": "Pan integral + filete de ternera",
     "items": [
       {"food_id": "pan_integral", "base_g": 70},
       {"food_id": "ternera_filete_magra", "base_g": 250},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["patata_cocida"]}
+    ]
   },
   {
-    "menu_id": "cena_pan_patata_hamburguesa",
+    "menu_id": "cena_patata_ternera",
     "meal_type": "cena",
-    "menu_name": "Pan integral o patata + hamburguesa magra",
+    "menu_name": "Patata cocida/airfryer + filete de ternera",
+    "items": [
+      {"food_id": "patata_cocida", "base_g": 200},
+      {"food_id": "ternera_filete_magra", "base_g": 250},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
+  },
+  {
+    "menu_id": "cena_pan_hamburguesa",
+    "meal_type": "cena",
+    "menu_name": "Pan integral + hamburguesa magra (≤4% grasa)",
     "items": [
       {"food_id": "pan_integral", "base_g": 70},
       {"food_id": "hamburguesa_magra", "base_g": 250},
       {"food_id": "aceite_oliva", "base_g": 5}
-    ],
-    "options": {"carb_alt_ids": ["patata_cocida"]}
+    ]
+  },
+  {
+    "menu_id": "cena_patata_hamburguesa",
+    "meal_type": "cena",
+    "menu_name": "Patata cocida/airfryer + hamburguesa magra (≤4% grasa)",
+    "items": [
+      {"food_id": "patata_cocida", "base_g": 200},
+      {"food_id": "hamburguesa_magra", "base_g": 250},
+      {"food_id": "aceite_oliva", "base_g": 5}
+    ]
   },
   {
     "menu_id": "cena_noquis_salmon",

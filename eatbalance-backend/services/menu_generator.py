@@ -12,12 +12,12 @@ class Macro:
 
 def macros_of(food_row, grams: float) -> Macro:
     factor = grams / 100.0
-    return Macro(
-        kcal=float(food_row["kcal"]) * factor,
-        protein_g=float(food_row["protein_g"]) * factor,
-        carb_g=float(food_row["carb_g"]) * factor,
-        fat_g=float(food_row["fat_g"]) * factor,
-    )
+    P = float(food_row["protein_g"]) * factor
+    C = float(food_row["carb_g"]) * factor
+    F = float(food_row["fat_g"]) * factor
+    kcal = 4 * (P + C) + 9 * F  # <-- kcal derivadas de macros (no usamos la columna 'kcal')
+    return Macro(kcal=kcal, protein_g=P, carb_g=C, fat_g=F)
+
 
 def sum_macros(macros_list: List[Macro]) -> Macro:
     tot = Macro(0, 0, 0, 0)

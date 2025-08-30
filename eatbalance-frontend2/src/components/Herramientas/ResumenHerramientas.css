@@ -1,133 +1,144 @@
-
-
+/* ===== Layout general de la página (se mantiene) ===== */
 .resumen {
-    font-family: 'GothamRounded';
-    padding: 2rem;
-    background-image: url(/eatbalance/fondo.jpg);
-    background-attachment: fixed;
+  font-family: 'GothamRounded';
+  padding: 2rem;                 /* mantenemos padding para el contenido */
+  background-image: url(/eatbalance/fondo.jpg);
+  background-attachment: fixed;
+}
+
+/* ===== HERO full-bleed (pegado a los lados y arriba) ===== */
+.hero-section {
+  position: relative;
+  min-height: clamp(420px, 48vh, 620px);
+  margin: 0 0 2rem;              /* margen inferior normal */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* truco “full-bleed”: el hero ignora el padding lateral del contenedor */
+.hero-section.hero-bleed {
+  margin: 0 calc(50% - 50vw) 2rem;   /* sin margen arriba ni laterales */
+  border-top-left-radius: 0;         /* pegado al navbar */
+  border-top-right-radius: 0;
+}
+
+/* imagen de fondo a toda pantalla dentro del hero */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ligera máscara para legibilidad del texto a la izquierda */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.62) 0 34%, rgba(0,0,0,0) 60%);
+  z-index: 1;
+}
+
+/* caja “glass” del título + subtítulo */
+.hero-glass{
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 16px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.28));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* título con subrayados finos (bonito) */
+.hero-title{
+  margin: 0 0 4px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  line-height: 1.04;
+  color: #fff;
+  font-size: clamp(28px, 4.2vw, 56px);
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+
+.hero-title .lead,
+.hero-title .accent{
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;       /* acerca el subrayado al texto */
+}
+.hero-title .lead::after,
+.hero-title .accent::after{
+  content: "";
+  position: absolute;
+  bottom: -3px;              /* subrayado muy pegado */
+  height: 4px;               /* fino */
+  border-radius: 999px;
+}
+
+/* “Tus herramientas de” → subrayado blanco algo más corto */
+.hero-title .lead::after{
+  left: 4%;
+  right: 4%;
+  background: rgba(255,255,255,.92);
+}
+
+/* “nutrición” → gradiente verde exacto al ancho del texto */
+.hero-title .accent{
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+.hero-title .accent::after{
+  left: 0; right: 0;
+  background: linear-gradient(90deg,#34d399 0%,#22c55e 50%,#84cc16 100%);
+}
+
+/* subtítulo */
+.hero-subtitle{
+  margin: 4px 0 0;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #eaf2ff;
+  opacity: .95;
+}
+
+/* animación que ya usabas */
+.slide-in-zoom { opacity: 0; transform: scale(.95); transition: opacity .6s ease, transform .6s ease; }
+.slide-in-zoom.visible { opacity: 1; transform: none; }
+
+/* resto de secciones (no tocadas) */
+.courses-section { margin-bottom: 2.5rem; }
+.courses-section h2 { color: #007acc; margin-bottom: 2rem; text-align: center; }
+.courses-section ul { list-style-type: none; padding-left: 0; }
+.courses-section li {
+  margin-bottom: 2rem;
+  background: #5d95ca85;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.courses-section li:hover { transform: translateY(-5px); box-shadow: 0 6px 25px rgba(0,0,0,.15); background-color: #f9f9f9; }
+.sky-blue-button { background:#16223f; color:#fff; padding:.8rem 1.5rem; border:none; border-radius:8px; cursor:pointer; font-weight:700; }
+.sky-blue-button:hover { background:#008ecc; }
+
+
+/* ==== FIX: pegar el hero arriba en "Todas las herramientas" ==== */
+.resumen {
+  padding-top: 0 !important;     /* quita el espacio superior */
 }
 
 .hero-section {
-    text-align: center;
-    margin-bottom: 3rem;
+  margin-top: 0 !important;      /* por si algún reset mete margen */
 }
 
 .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen llene el contenedor sin distorsión */
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: block;                 /* evita espacios de <img> inline */
+  border-top-left-radius: 0;      /* que el logo toque la barra superior */
+  border-top-right-radius: 0;
 }
-
-.hero-title {
-    font-size: 300%;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
-    color: #ebc870;
-    text-align: center;
-}
-
-.hero-subtitle {
-    font-size: 150%;
-    line-height: 1.2;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.15);
-    text-align: center;
-}
-
-.introduction-section,
-.modules-section,
-.instructor-section,
-.details-section,
-.contact-section {
-    margin-bottom: 2.5rem;
-}
-
-h2 {
-    color: #007acc;
-    margin-bottom: 1rem;
-}
-
-ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-li {
-    margin-bottom: 1.2rem;
-}
-
-.slide-in-zoom {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.slide-in-zoom.visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.sky-blue-button {
-    background-color: #16223f;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.sky-blue-button:hover {
-    background-color: #008ecc;
-}
-
-.courses-section {
-    margin-bottom: 2.5rem;
-}
-
-.courses-section h2 {
-    color: #007acc;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.courses-section ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.courses-section li {
-    margin-bottom: 2rem;
-    background: #5d95ca85;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.courses-section li strong {
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.courses-section li p {
-    margin: 0.5rem 0 1rem;
-    color: #555;
-}
-
-
-.courses-section li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-    background-color: #f9f9f9;
-}
-
-.courses-section li:focus-within {
-    outline: 2px solid #007acc;
-    outline-offset: 4px;
-}
-

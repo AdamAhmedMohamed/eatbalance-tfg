@@ -349,3 +349,90 @@ hr {
   line-height: 1.5; /* Adjust line height for proper vertical alignment */
   vertical-align: middle; /* Ensure vertical alignment */
 }
+
+/* ───── Perfil de usuario ───── */
+.nav-session.profile {
+  position: relative;
+}
+
+.user-chip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.user-chip:hover,
+.user-chip.open {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.user-chip .u-name {
+  grid-column: 1 / 2;
+  grid-row: 1;
+  font-weight: 800;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-chip .u-date {
+  grid-column: 1 / 2;
+  grid-row: 2;
+  font-size: 12px;
+  opacity: .85;
+  margin-top: -2px;
+}
+.user-chip .u-chev {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  align-self: center;
+  margin-left: 6px;
+  transition: transform .2s ease;
+}
+.user-chip.open .u-chev { transform: rotate(180deg); }
+
+/* Menú del perfil */
+.profile-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 200px;
+  background: #0b132b; /* tono oscuro elegante */
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  padding: 6px;
+  z-index: 1200;
+}
+.profile-menu .profile-action {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.profile-menu .profile-action:hover {
+  background: #1f2a44;
+}
+
+/* Responsive: que el menú no se corte en el lateral */
+@media (max-width: 1200px) {
+  .profile-menu {
+    left: 0; right: auto; /* dentro del panel lateral */
+  }
+}

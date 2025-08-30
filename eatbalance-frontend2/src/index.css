@@ -24,3 +24,37 @@ body {
   font-family: 'Varela Round', sans-serif;
 }
 
+/* ===== Layout base: que el contenido empuje el footer ===== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;          /* ← elimina “bailes” laterales */
+}
+
+#root {
+  min-height: 100vh;           /* ocupa alto completo */
+  display: flex;
+  flex-direction: column;      /* header/main/footer en columna */
+}
+
+.page-main {
+  flex: 1 0 auto;              /* el main crece y empuja al footer */
+  width: 100%;
+}
+
+/* Footer siempre al final, sin fijarlo */
+.site-footer,
+footer {
+  position: static !important; /* evita fixed */
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Hero o secciones con fondos que podrían desbordar */
+.hero-section { overflow-x: clip; }   /* o hidden si prefieres */
+

@@ -1,5 +1,5 @@
 // Alimentos.jsx
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./Alimentos.css";
 
 const BASE_URL = "http://127.0.0.1:8000";
@@ -15,7 +15,10 @@ export default function Alimentos() {
   const [loadingES, setLoadingES] = useState(false);
   const [errorES, setErrorES] = useState("");
 
-  // 👉 cantidad en gramos para la calculadora
+  // Recientes por usuario
+  const [recent, setRecent] = useState([]);
+
+  // cantidad en gramos para la calculadora
   const [grams, setGrams] = useState(100);
 
   // === SUMATORIO (aislado) ===
@@ -98,7 +101,19 @@ export default function Alimentos() {
       .slice(0, 15);
   };
 
-  // --- Buscar en OFF (ES) ---
+  // cargar recientes al entrar (si hay token)
+  useEffect(() => {
+    const token = localStorage.getItem("eb_token");
+    if (!token) return;
+    fetch(`${BASE_URL}/users/recent-searches?limit=10`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => data && setRecent(data))
+      .catch(() => {});
+  }, []);
+
+  // Buscar en OFF (ES)
   const buscarES = async () => {
     setErrorES("");
     setSel(null);
@@ -120,6 +135,27 @@ export default function Alimentos() {
       }
       setResultados(lista);
       setStep("choose");
+
+      // registrar la búsqueda (si hay token)
+      const token = localStorage.getItem("eb_token");
+      if (token) {
+        fetch(`${BASE_URL}/users/recent-searches`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ term: query, source: "openfoodfacts" }),
+        })
+          .then(() =>
+            fetch(`${BASE_URL}/users/recent-searches?limit=10`, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
+          )
+          .then((r2) => (r2?.ok ? r2.json() : null))
+          .then((data2) => data2 && setRecent(data2))
+          .catch(() => {});
+      }
     } catch (e) {
       console.error(e);
       setErrorES("No se pudo conectar al backend.");
@@ -178,7 +214,7 @@ export default function Alimentos() {
     }
   };
 
-  // 👉 cálculo escalado por gramos
+  // cálculo escalado por gramos
   const scaled = useMemo(() => {
     if (!sel?.macros100g) return null;
     const g = Math.max(0, Number(grams) || 0);
@@ -198,28 +234,28 @@ export default function Alimentos() {
   const fmtKcal = (v) => (v == null ? "—" : Math.round(v));
 
   return (
-      <div className="Partnership">
-        {/* HERO */}
-        <div className="hero-section">
-    <img src="/logo-eatbalance.png" className="hero-image" alt="" />
-    <div className="hero-glass">
-      <h1 className="hero-title">
-        <span className="lead">Consulta</span> <span className="accent">Alimentos</span>
-      </h1>
-      <p className="hero-subtitle">
-        Busca calorías y macros de productos de supermercado en España.
-      </p>
-    </div>
-  </div>
-
+    <div className="Partnership">
+      {/* HERO */}
+      <div className="hero-section">
+        <img src="/logo-eatbalance.png" className="hero-image" alt="" />
+        <div className="hero-glass">
+          <h1 className="hero-title">
+            <span className="lead">Consulta</span>{" "}
+            <span className="accent">Alimentos</span>
+          </h1>
+          <p className="hero-subtitle">
+            Busca calorías y macros de productos de supermercado en España.
+          </p>
+        </div>
+      </div>
 
       {/* Tarjeta única: Productos / marcas (OFF) */}
       <div className="search-grid">
         <div className="card">
           <h2 className="card-title">Productos / Marcas (ESPAÑOLAS)</h2>
           <p className="card-subtitle">
-            Usa búsquedas específicas (marca + producto) para encontrar el
-            tuyo. Después, podrás ver los valores por 100 g y calcular por tu
+            Usa búsquedas específicas (marca + producto) para encontrar el tuyo.
+            Después, podrás ver los valores por 100 g y calcular por tu
             cantidad.
           </p>
 
@@ -238,6 +274,26 @@ export default function Alimentos() {
                 </button>
               </div>
               {errorES && <p className="error">{errorES}</p>}
+
+              {/* Búsquedas recientes */}
+              {recent.length > 0 && (
+                <div className="recent-chips">
+                  <div className="recent-title">Búsquedas recientes:</div>
+                  <div className="recent-list">
+                    {recent.map((r, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className="recent-chip"
+                        onClick={() => setQuery(r.term)}
+                        title={new Date(r.created_at).toLocaleString("es-ES")}
+                      >
+                        {r.term}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </>
           )}
 
@@ -381,7 +437,7 @@ export default function Alimentos() {
                   * Cálculo basado en los valores por 100 g del producto.
                 </p>
 
-                {/* === SUMATORIO: botón para añadir la selección actual === */}
+                {/* SUMATORIO: botón para añadir la selección actual */}
                 <div className="sum-actions">
                   <button
                     type="button"
@@ -402,7 +458,7 @@ export default function Alimentos() {
           )}
         </div>
 
-        {/* === SUMATORIO: panel acumulado, fuera del detalle para que siempre se vea === */}
+        {/* === SUMATORIO: panel acumulado === */}
         {seleccion.length > 0 && (
           <div className="sum-card">
             <div className="sum-head">
@@ -418,6 +474,17 @@ export default function Alimentos() {
 
             <div className="sum-table-wrap">
               <table className="sum-table">
+                {/* Control de anchos y estabilidad */}
+                <colgroup>
+                  <col style={{ width: "auto" }} />
+                  <col style={{ width: 110 }} />
+                  <col style={{ width: 90 }} />
+                  <col style={{ width: 70 }} />
+                  <col style={{ width: 70 }} />
+                  <col style={{ width: 70 }} />
+                  <col style={{ width: 44 }} />
+                </colgroup>
+
                 <thead>
                   <tr>
                     <th>Alimento</th>
@@ -433,16 +500,52 @@ export default function Alimentos() {
                   {seleccion.map((it) => (
                     <tr key={it.id}>
                       <td>
-                        <div className="sum-food">
+                        <div className="sum-food one-line">
                           <div className="sum-name">{it.name}</div>
-                          {it.brand && <div className="sum-brand">{it.brand}</div>}
+                          {it.brand && <div className="sum-brand">— {it.brand}</div>}
                         </div>
                       </td>
-                      <td className="tr">{d0(it.grams)}</td>
-                      <td className="tr">{d0(it.kcal)}</td>
-                      <td className="tr">{d1(it.prot)}</td>
-                      <td className="tr">{d1(it.carb)}</td>
-                      <td className="tr">{d1(it.gras)}</td>
+
+                      {/* grams: número + “g” en línea debajo */}
+                      <td className="tr grams-cell">
+                        <div className="stack">
+                          <span className="v">{d0(it.grams)}</span>
+                          <span className="u">g</span>
+                        </div>
+                      </td>
+
+                      {/* kcal en dos líneas */}
+                      <td className="tr">
+                        <div className="stack">
+                          <span className="v">{d0(it.kcal)}</span>
+                          <span className="u">kcal</span>
+                        </div>
+                      </td>
+
+                      {/* proteínas en dos líneas */}
+                      <td className="tr">
+                        <div className="stack">
+                          <span className="v">{d1(it.prot)}</span>
+                          <span className="u">g</span>
+                        </div>
+                      </td>
+
+                      {/* carbohidratos en dos líneas */}
+                      <td className="tr">
+                        <div className="stack">
+                          <span className="v">{d1(it.carb)}</span>
+                          <span className="u">g</span>
+                        </div>
+                      </td>
+
+                      {/* grasas en dos líneas */}
+                      <td className="tr">
+                        <div className="stack">
+                          <span className="v">{d1(it.gras)}</span>
+                          <span className="u">g</span>
+                        </div>
+                      </td>
+
                       <td className="tr">
                         <button
                           type="button"
@@ -458,11 +561,46 @@ export default function Alimentos() {
                 <tfoot>
                   <tr className="sum-total">
                     <td>Totales</td>
-                    <td className="tr">{d0(totals.grams)}</td>
-                    <td className="tr">{d0(totals.kcal)}</td>
-                    <td className="tr">{d1(totals.prot)}</td>
-                    <td className="tr">{d1(totals.carb)}</td>
-                    <td className="tr">{d1(totals.gras)}</td>
+
+                    {/* grams totales: igual en dos líneas */}
+                    <td className="tr grams-cell">
+                      <div className="stack">
+                        <span className="v">{d0(totals.grams)}</span>
+                        <span className="u">g</span>
+                      </div>
+                    </td>
+
+                    {/* kcal totales en dos líneas */}
+                    <td className="tr">
+                      <div className="stack">
+                        <span className="v">{d0(totals.kcal)}</span>
+                        <span className="u">kcal</span>
+                      </div>
+                    </td>
+
+                    {/* proteínas totales */}
+                    <td className="tr">
+                      <div className="stack">
+                        <span className="v">{d1(totals.prot)}</span>
+                        <span className="u">g</span>
+                      </div>
+                    </td>
+
+                    {/* carbohidratos totales */}
+                    <td className="tr">
+                      <div className="stack">
+                        <span className="v">{d1(totals.carb)}</span>
+                        <span className="u">g</span>
+                      </div>
+                    </td>
+
+                    {/* grasas totales */}
+                    <td className="tr">
+                      <div className="stack">
+                        <span className="v">{d1(totals.gras)}</span>
+                        <span className="u">g</span>
+                      </div>
+                    </td>
                     <td></td>
                   </tr>
                 </tfoot>

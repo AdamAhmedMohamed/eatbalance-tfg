@@ -424,3 +424,35 @@ html, body { margin: 0; } /* por si acaso */
 .gm-subtitle{
   margin-top: 4px !important;           /* menos aire con el título */
 }
+
+/* Encabezados numéricos a la derecha (para que cuadren con los datos) */
+.gm-table thead th.t-right { text-align: right !important; }
+/* El primer encabezado ("Alimento") queda a la izquierda */
+.gm-table thead th:first-child { text-align: left !important; }
+
+/* (opcional) números con ancho tabular para que alineen perfecto */
+.gm-table { font-variant-numeric: tabular-nums; }
+
+/* 1) Quitar gutters globales en esta página para que el hero pueda sangrar */
+.gm-wrap {
+  padding: 0 !important;                 /* antes: 0 16px 16px */
+}
+
+/* 2) Hero a ras de pantalla: sin padding, sin borde, sin radios y sin margen arriba */
+.gm-hero {
+  margin: 0 0 var(--gap-after-hero) 0 !important;  /* conserva solo separación inferior */
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;                 /* el fondo llega hasta los bordes */
+}
+
+/* 3) Devolver el “aire” lateral al contenido bajo el hero */
+.gm-panel,
+.gm-bucket,
+.gm-final-block {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+/* opcional pero recomendado para evitar scroll lateral por 1–2px de overflow */
+html, body, #root { overflow-x: hidden; }
